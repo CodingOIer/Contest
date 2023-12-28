@@ -8,7 +8,24 @@
 </head>
 
 <body>
-    <script src="./main.js"></script>
+    <script>
+        const Http = new XMLHttpRequest();
+        const url = 'https://codingoier.github.io/Contest/data/list.txt';
+        Http.open("GET", url);
+        Http.send();
+        Http.onreadystatechange = (e) => {
+            console.log(Http.responseText)
+        }
+        console.log(Http.responseText)
+        let text = Http.responseText;
+        let lines = text.split('\n');
+        for (let i = 0; i < lines.length; i++) {
+            let parts = lines[i].split('#');
+            let str1 = parts[0].trim();
+            let str2 = parts[1].trim();
+            console.log(`name: ${str1}, url: https://codingoier.github.io/Contest-Data/zip/${str2}`);
+        }
+    </script>
 </body>
 
 </html>
