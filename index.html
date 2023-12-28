@@ -8,24 +8,28 @@
 </head>
 
 <body>
+    <h1>CodingOIer's Contest Result Download Station</h1>
     <script>
         const Http = new XMLHttpRequest();
         const url = 'https://codingoier.github.io/Contest/data/list.txt';
         Http.open("GET", url);
         Http.send();
         Http.onreadystatechange = (e) => {
-            console.log(Http.responseText)
-        }
-        console.log(Http.responseText)
-        let text = Http.responseText;
-        let lines = text.split('\r\n');
-        for (let i = 0; i < lines.length; i++) {
-            let parts = lines[i].split('#');
-            let str1 = parts[0];
-            let str2 = parts[1];
-            console.log(`name: ${str1}, url: https://codingoier.github.io/Contest-Data/zip/${str2}`);
+            var text = Http.responseText;
+            let lines = text.split('\n');
+            var html = '';
+            for (let i = 0; i < lines.length; i++) {
+                let parts = lines[i].split('#');
+                let str1 = parts[0];
+                let str2 = parts[1];
+                html += `<a href = "https://codingoier.github.io/Contest-Data/zip/${str2}"><h2>${str1}</h2></a>`;
+            }
+            console.log(html);
+            var to = document.getElementById('file');
+            to.innerHTML = html;
         }
     </script>
+    <div id="file"></div>
 </body>
 
 </html>
